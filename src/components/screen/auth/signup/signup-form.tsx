@@ -1,21 +1,46 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
-
+import {Controller, useForm} from 'react-hook-form'
 import Button from "@/shared/ui/button";
 import React from "react";
 
 export default function SignupForm() {
+        const { control, handleSubmit } = useForm()
     const handleSignup = () => {
         alert("Okay");
     }
     return (
         <View style={styles.formContainer}>
-            <View style={styles.formItem}>
+                        <View style={styles.formItem}>
                 <Text style={styles.label}>Email Or Phone Number</Text>
-                <TextInput style={styles.input} placeholder="Email" />
+                <Controller
+                    control={control}
+                    name="email"
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            onChangeText={onChange}
+                            onBlur={onBlur}
+                            value={value}
+                        />
+                    )}
+                />
             </View>
             <View style={styles.formItem}>
                 <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input} placeholder="********" />
+                <Controller
+                    control={control}
+                    name="password"
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Password"
+                            onChangeText={onChange}
+                            onBlur={onBlur}
+                            value={value}
+                        />
+                    )}
+                />
             </View>
             <Button onPress={handleSignup}>Sign up</Button>
         </View>
